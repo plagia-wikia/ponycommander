@@ -1,0 +1,9 @@
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\bin\Debug\PonyCommander.exe
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\bin\Debug\PonyCommander.pdb
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.PonyCommanderForm.resources
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.Properties.Resources.resources
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\ResGen.read.1.tlog
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\ResGen.write.1.tlog
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.exe
+c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.pdb
