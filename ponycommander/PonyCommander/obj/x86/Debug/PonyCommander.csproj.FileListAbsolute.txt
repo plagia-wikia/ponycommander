@@ -7,3 +7,4 @@ c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommande
 c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\ResGen.write.1.tlog
 c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.exe
 c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.pdb
+C:\Users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.PonySplash.resources
