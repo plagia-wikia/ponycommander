@@ -197,6 +197,7 @@ namespace PonyCommander
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.cmdDelete);
@@ -209,7 +210,9 @@ namespace PonyCommander
             this.Controls.Add(this.lvOkno1);
             this.KeyPreview = true;
             this.Name = "PonyCommanderForm";
-            this.Text = "Pony Commander";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "PonyCommander";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.PonyCommanderForm_Load);
             this.SizeChanged += new System.EventHandler(this.PonyCommanderForm_Resize);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PonyCommanderForm_KeyDown);

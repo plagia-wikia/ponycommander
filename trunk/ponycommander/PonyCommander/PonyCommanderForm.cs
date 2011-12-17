@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace PonyCommander
 {
@@ -20,7 +21,17 @@ namespace PonyCommander
 
         public PonyCommanderForm()
         {
+            Thread t = new Thread(new ThreadStart(SplashScreen));
+            t.Start();
+            Thread.Sleep(1500);
             InitializeComponent();
+            t.Abort();
+            
+        }
+
+        public void SplashScreen()
+        {
+            Application.Run(new PonySplash());
         }
 
         private void wyswietl(ListView gdzie, string katalog)
