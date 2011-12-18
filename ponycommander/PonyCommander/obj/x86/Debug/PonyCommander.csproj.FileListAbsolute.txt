@@ -8,3 +8,5 @@ c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommande
 c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.exe
 c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.pdb
 C:\Users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.PonySplash.resources
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\PonyCommander.exe
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\PonyCommander.pdb
