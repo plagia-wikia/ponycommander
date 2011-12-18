@@ -45,26 +45,34 @@ namespace PonyCommander
                 gdzie.Items.Add(new ListViewItem("..."));
 
             int i;
-            nazwy = Directory.GetDirectories(katalog);
-            for (i = 0; i < nazwy.Length; i++)
+            try
             {
-                dir = new DirectoryInfo(nazwy[i]);
-                buf = new ListViewItem(new string[] { dir.Name, "<DIR>" });
-                gdzie.Items.Add(buf);
-            }
-            string nazwapliku;
-            int gdziekropka;
-            nazwy = Directory.GetFiles(katalog);
-            for (i = 0; i < nazwy.Length; i++)
-            {
-                plik = new FileInfo(nazwy[i]);
-                nazwapliku = plik.Name;
-                gdziekropka = plik.Name.LastIndexOf('.');
-                if (gdziekropka > 0)
-                    nazwapliku = nazwapliku.Substring(0, plik.Name.LastIndexOf('.'));
-                buf = new ListViewItem(new string[] { nazwapliku, plik.Extension.Replace(".", ""),
+                nazwy = Directory.GetDirectories(katalog);
+                for (i = 0; i < nazwy.Length; i++)
+                {
+                    dir = new DirectoryInfo(nazwy[i]);
+                    buf = new ListViewItem(new string[] { dir.Name, "<DIR>" });
+                    gdzie.Items.Add(buf);
+                }
+                string nazwapliku;
+                int gdziekropka;
+                nazwy = Directory.GetFiles(katalog);
+                for (i = 0; i < nazwy.Length; i++)
+                {
+                    plik = new FileInfo(nazwy[i]);
+                    nazwapliku = plik.Name;
+                    gdziekropka = plik.Name.LastIndexOf('.');
+                    if (gdziekropka > 0)
+                        nazwapliku = nazwapliku.Substring(0, plik.Name.LastIndexOf('.'));
+                    buf = new ListViewItem(new string[] { nazwapliku, plik.Extension.Replace(".", ""),
                     plik.Length.ToString() });
-                gdzie.Items.Add(buf);
+                    gdzie.Items.Add(buf);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -84,6 +92,50 @@ namespace PonyCommander
                     File.Copy(nazwa, cel + Path.GetFileName(nazwa), true);
                 }
             }
+        }
+
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Anuluj";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            form.TopMost = true;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
         }
 
         private void PonyCommanderForm_Resize(object sender, EventArgs e)
@@ -252,11 +304,36 @@ namespace PonyCommander
                 if (AktywneOkno.SelectedItems[i].Text == "...")
                     return;
                 string zrodlo, cel;
+                
                 if (AktywneOkno.SelectedItems[i].SubItems[1].Text == "<DIR>")
                 {
                     zrodlo = AktywnaSciezka + AktywneOkno.SelectedItems[i].Text + "\\";
                     cel = NieAktywnaSciezka + AktywneOkno.SelectedItems[i].Text + "\\";
-                    KopiujKatalog(zrodlo, cel);
+                    if (zrodlo != cel)
+                    {
+                        if (Directory.Exists(cel))
+                        {
+                            DialogResult odp = MessageBox.Show("Czy zastąpić istniejący katalog?", "Katalog istnieje",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (odp != DialogResult.Yes) return;
+                        }
+                        try
+                        {
+                            KopiujKatalog(zrodlo, cel);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Próbujesz skopiować do tego samego katalogu", "Błąd",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
+                    
                 }
                 else
                 {
@@ -264,7 +341,31 @@ namespace PonyCommander
                         "." + AktywneOkno.SelectedItems[i].SubItems[1].Text;
                     cel = NieAktywnaSciezka + AktywneOkno.SelectedItems[i].Text +
                         "." + AktywneOkno.SelectedItems[i].SubItems[1].Text;
-                    File.Copy(zrodlo, cel, true);
+                    if (zrodlo != cel)
+                    {
+                        if (File.Exists(cel))
+                        {
+                            DialogResult odp = MessageBox.Show("Czy zastąpić istniejący plik?", "Plik istnieje",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (odp != DialogResult.Yes) return;
+                        }
+                        try
+                        {
+                            
+                            File.Copy(zrodlo, cel, true);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Nie można uzyskać dostępu do pliku", "Błąd",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Próbujesz skopiować do tego samego katalogu", "Błąd",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
             }
             wyswietl(NieAktywneOkno, NieAktywnaSciezka);
@@ -282,8 +383,35 @@ namespace PonyCommander
                 {
                     zrodlo = AktywnaSciezka + AktywneOkno.SelectedItems[i].Text + "\\";
                     cel = NieAktywnaSciezka + AktywneOkno.SelectedItems[i].Text + "\\";
-                    KopiujKatalog(zrodlo, cel);
-                    Directory.Delete(zrodlo, true);
+
+                    if (zrodlo != cel)
+                    {
+                        if (Directory.Exists(cel))
+                        {
+                            DialogResult odp = MessageBox.Show("Czy zastąpić istniejący katalog?", "Katalog istnieje",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (odp != DialogResult.Yes) return;
+                        }
+                        try
+                        {
+                            KopiujKatalog(zrodlo, cel);
+                            Directory.Delete(zrodlo, true);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Próbujesz przenieść do tego samego katalogu", "Błąd",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+
+
+
                 }
                 else
                 {
@@ -291,8 +419,32 @@ namespace PonyCommander
                         "." + AktywneOkno.SelectedItems[i].SubItems[1].Text;
                     cel = NieAktywnaSciezka + AktywneOkno.SelectedItems[i].Text +
                         "." + AktywneOkno.SelectedItems[i].SubItems[1].Text;
-                    File.Copy(zrodlo, cel, true);
-                    File.Delete(zrodlo);
+                    if (zrodlo != cel)
+                    {
+                        if (File.Exists(cel))
+                        {
+                            DialogResult odp = MessageBox.Show("Czy zastąpić istniejący plik?", "Plik istnieje",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (odp != DialogResult.Yes) return;
+
+                        }
+                        try
+                        {
+                            File.Copy(zrodlo, cel, true);
+                            File.Delete(zrodlo);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Nie można uzyskać dostępu do pliku", "Błąd",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Próbujesz przenieść do tego samego katalogu", "Błąd",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             wyswietl(lvOkno1, sciezka1);
@@ -313,14 +465,112 @@ namespace PonyCommander
                 if (AktywneOkno.SelectedItems[i].SubItems[1].Text == "<DIR>")
                 {
                     co = AktywnaSciezka + AktywneOkno.SelectedItems[i].Text;
-                    Directory.Delete(co, true);
+                    try
+                    {
+                        Directory.Delete(co, true);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
                     co = AktywnaSciezka + AktywneOkno.SelectedItems[i].Text +
                         "." + AktywneOkno.SelectedItems[i].SubItems[1].Text;
-                    File.Delete(co);
+                    try
+                    {
+                        File.Delete(co);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Nie można uzyskać dostępu do pliku", "Błąd",
+                           MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
+            }
+            wyswietl(AktywneOkno, AktywnaSciezka);
+        }
+        
+        private void cmdRename_Click(object sender, EventArgs e)
+        {            
+            string wartosc, zrodlo, cel;
+            try
+            {
+                if (AktywneOkno.SelectedItems[0].SubItems[1].Text == "<DIR>") wartosc = AktywneOkno.SelectedItems[0].Text;
+                else wartosc = AktywneOkno.SelectedItems[0].Text +
+                        "." + AktywneOkno.SelectedItems[0].SubItems[1].Text;
+                if (InputBox("Zmień nazwę", "Podaj nową nazwę:", ref wartosc) == DialogResult.OK)
+                {
+
+                    zrodlo = AktywnaSciezka + AktywneOkno.SelectedItems[0].Text +
+                        "." + AktywneOkno.SelectedItems[0].SubItems[1].Text;
+                    cel = AktywnaSciezka + wartosc;
+
+                    if (AktywneOkno.SelectedItems[0].SubItems[1].Text == "<DIR>")
+                    {                       
+                        try
+                        {
+                            zrodlo = AktywnaSciezka + AktywneOkno.SelectedItems[0].Text + "\\";
+                            KopiujKatalog(zrodlo, cel);
+                            Directory.Delete(zrodlo, true);
+                        }
+                        catch
+                        {
+                            
+                            MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            File.Copy(zrodlo, cel, true);
+                            File.Delete(zrodlo);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Nie można uzyskać dostępu do pliku", "Błąd",
+                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Wybierz plik lub katalog", "Błąd",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            wyswietl(AktywneOkno, AktywnaSciezka);
+        }
+
+        private void cmdNew_Click(object sender, EventArgs e)
+        {
+            string cel, wartosc;
+            wartosc = "";
+            try
+            {
+                if (InputBox("Utwórz katalog", "Podaj nazwę katalogu:", ref wartosc) == DialogResult.OK)
+                {
+                    cel = AktywnaSciezka + wartosc;
+                    if (Directory.Exists(cel))
+                    {
+                        MessageBox.Show("Katalog już istnieje", "Błąd",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        Directory.CreateDirectory(cel);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Nie można utworzyć katalogu", "Błąd",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             wyswietl(AktywneOkno, AktywnaSciezka);
         }
@@ -341,7 +591,14 @@ namespace PonyCommander
                 case Keys.F8:
                     cmdDelete_Click(null, null);
                     break;
+                case Keys.F9:
+                    cmdRename_Click(null, null);
+                    break;
+                case Keys.F10:
+                    cmdNew_Click(null, null);
+                    break;
             }
         }
+                
     }
 }

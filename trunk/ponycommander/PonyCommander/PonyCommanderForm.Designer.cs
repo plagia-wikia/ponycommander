@@ -51,13 +51,14 @@ namespace PonyCommander
             this.cmdCopy = new System.Windows.Forms.Button();
             this.cmdMove = new System.Windows.Forms.Button();
             this.cmdDelete = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.cmdRename = new System.Windows.Forms.Button();
+            this.cmdNew = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvOkno1
             // 
-            this.lvOkno1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvOkno1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lvOkno1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Nazwa,
             this.Typ,
@@ -89,8 +90,8 @@ namespace PonyCommander
             // 
             // lvOkno2
             // 
-            this.lvOkno2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvOkno2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvOkno2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -183,15 +184,27 @@ namespace PonyCommander
             this.cmdDelete.UseVisualStyleBackColor = true;
             this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
             // 
-            // button5
+            // cmdRename
             // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button5.Location = new System.Drawing.Point(520, 527);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(120, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.cmdRename.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cmdRename.Location = new System.Drawing.Point(520, 527);
+            this.cmdRename.Name = "cmdRename";
+            this.cmdRename.Size = new System.Drawing.Size(120, 23);
+            this.cmdRename.TabIndex = 8;
+            this.cmdRename.Text = "Zmień nazwę\r\nF9";
+            this.cmdRename.UseVisualStyleBackColor = true;
+            this.cmdRename.Click += new System.EventHandler(this.cmdRename_Click);
+            //
+            // cmdNew
+            // 
+            this.cmdNew.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cmdNew.Location = new System.Drawing.Point(646, 527);
+            this.cmdNew.Name = "cmdNew";
+            this.cmdNew.Size = new System.Drawing.Size(120, 23);
+            this.cmdNew.TabIndex = 9;
+            this.cmdNew.Text = "Utwórz katalog\r\n10";
+            this.cmdNew.UseVisualStyleBackColor = true;
+            this.cmdNew.Click += new System.EventHandler(this.cmdNew_Click);
             // 
             // PonyCommanderForm
             // 
@@ -199,7 +212,8 @@ namespace PonyCommander
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.cmdNew);
+            this.Controls.Add(this.cmdRename);
             this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.cmdMove);
             this.Controls.Add(this.cmdCopy);
@@ -237,7 +251,8 @@ namespace PonyCommander
         private System.Windows.Forms.Button cmdCopy;
         private System.Windows.Forms.Button cmdMove;
         private System.Windows.Forms.Button cmdDelete;
-        private System.Windows.Forms.Button button5;        
+        private System.Windows.Forms.Button cmdRename;
+        private System.Windows.Forms.Button cmdNew;
     }
 }
 
