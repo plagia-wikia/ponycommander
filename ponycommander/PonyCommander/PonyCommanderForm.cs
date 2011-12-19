@@ -21,6 +21,7 @@ namespace PonyCommander
         private string sciezka2 = "C:\\";
         private int sortColumn1 = -1;
         private int sortColumn2 = -1;
+        Form progress = new Progress();
 
         public PonyCommanderForm()
         {
@@ -35,6 +36,11 @@ namespace PonyCommander
         public void SplashScreen()
         {
             Application.Run(new PonySplash());
+        }
+
+        public void Progress()
+        {
+            Application.Run(new Progress());
         }
 
         private void wyswietl(ListView gdzie, string katalog)
@@ -88,7 +94,7 @@ namespace PonyCommander
             foreach (string nazwa in nazwy)
             {
                 if (Directory.Exists(nazwa))
-                {
+                {     
                     KopiujKatalog(nazwa, cel + Path.GetFileName(nazwa) + "\\");
                 }
                 else
@@ -97,6 +103,7 @@ namespace PonyCommander
                 }
             }
         }
+
 
         public static DialogResult InputBox(string title, string promptText, ref string value)
         {
@@ -335,12 +342,17 @@ namespace PonyCommander
                         }
                         try
                         {
+                            progress.Show();
+                            progress.TopMost = true;
+                            Thread.Sleep(500);
                             KopiujKatalog(zrodlo, cel);
+                            progress.Hide();
                         }
                         catch
                         {
                             MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            progress.Hide();
                         }
                     }
                     else
@@ -367,15 +379,17 @@ namespace PonyCommander
                         }
                         try
                         {
-
-                            
-                            
+                            progress.Show();
+                            progress.TopMost = true;
+                            Thread.Sleep(500);
                             File.Copy(zrodlo, cel, true);
+                            progress.Hide(); 
                         }
                         catch
                         {
                             MessageBox.Show("Nie można uzyskać dostępu do pliku", "Błąd",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            progress.Hide();
                         }
                     }
                     else
@@ -412,12 +426,17 @@ namespace PonyCommander
                         }
                         try
                         {
+                            progress.Show();
+                            progress.TopMost = true;
+                            Thread.Sleep(500);
                             Directory.Move(zrodlo, cel);
+                            progress.Hide();
                         }
                         catch
                         {
                             MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            progress.Hide();
                         }
                     }
                     else
@@ -447,12 +466,17 @@ namespace PonyCommander
                         }
                         try
                         {
+                            progress.Show();
+                            progress.TopMost = true;
+                            Thread.Sleep(500);
                             File.Move(zrodlo, cel);
+                            progress.Hide();
                         }
                         catch
                         {
                             MessageBox.Show("Nie można uzyskać dostępu do pliku", "Błąd",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            progress.Hide();
                         }
                         
                     }
@@ -483,12 +507,17 @@ namespace PonyCommander
                     co = AktywnaSciezka + AktywneOkno.SelectedItems[i].Text;
                     try
                     {
+                        progress.Show();
+                        progress.TopMost = true;
+                        Thread.Sleep(500);
                         Directory.Delete(co, true);
+                        progress.Hide();
                     }
                     catch
                     {
                         MessageBox.Show("Nie można uzyskać dostępu do katalogu", "Błąd",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        progress.Hide();
                     }
                 }
                 else
@@ -497,12 +526,17 @@ namespace PonyCommander
                         "." + AktywneOkno.SelectedItems[i].SubItems[1].Text;
                     try
                     {
+                        progress.Show();
+                        progress.TopMost = true;
+                        Thread.Sleep(500);
                         File.Delete(co);
+                        progress.Hide();
                     }
                     catch
                     {
                         MessageBox.Show("Nie można uzyskać dostępu do pliku", "Błąd",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        progress.Hide();
                     }
                     
                 }
