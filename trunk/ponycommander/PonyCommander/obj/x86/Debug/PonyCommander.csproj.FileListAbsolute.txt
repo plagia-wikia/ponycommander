@@ -34,3 +34,4 @@ C:\Users\Przemek\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\Po
 C:\Users\Przemek\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\ResGen.read.1.tlog
 C:\Users\Przemek\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
 C:\Users\Przemek\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.Progress.resources

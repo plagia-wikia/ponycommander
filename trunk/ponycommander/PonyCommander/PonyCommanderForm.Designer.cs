@@ -65,8 +65,8 @@ namespace PonyCommander
             // 
             // lvOkno1
             // 
-            this.lvOkno1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lvOkno1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lvOkno1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Nazwa,
             this.Typ,
@@ -80,9 +80,9 @@ namespace PonyCommander
             this.lvOkno1.TabIndex = 0;
             this.lvOkno1.UseCompatibleStateImageBehavior = false;
             this.lvOkno1.View = System.Windows.Forms.View.Details;
+            this.lvOkno1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvOkno1_ColumnClick);
             this.lvOkno1.Enter += new System.EventHandler(this.lvOkno1_Enter);
             this.lvOkno1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);
-            this.lvOkno1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvOkno1_ColumnClick);
             this.lvOkno1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseClick);
             this.lvOkno1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
             // 
@@ -94,6 +94,7 @@ namespace PonyCommander
             // 
             this.Typ.Text = "Typ";
             this.Typ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Typ.Width = 61;
             // 
             // Rozmiar
             // 
@@ -109,8 +110,8 @@ namespace PonyCommander
             // 
             // lvOkno2
             // 
-            this.lvOkno2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvOkno2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lvOkno2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -124,11 +125,11 @@ namespace PonyCommander
             this.lvOkno2.TabIndex = 1;
             this.lvOkno2.UseCompatibleStateImageBehavior = false;
             this.lvOkno2.View = System.Windows.Forms.View.Details;
-            this.lvOkno2.Enter += new System.EventHandler(this.lvOkno2_Enter);
-            this.lvOkno2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);            
-            this.lvOkno2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
-            this.lvOkno2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseClick);
             this.lvOkno2.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvOkno2_ColumnClick);
+            this.lvOkno2.Enter += new System.EventHandler(this.lvOkno2_Enter);
+            this.lvOkno2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);
+            this.lvOkno2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseClick);
+            this.lvOkno2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -236,23 +237,44 @@ namespace PonyCommander
             this.cmdNew.Text = "Utwórz katalog\r\n10";
             this.cmdNew.UseVisualStyleBackColor = true;
             this.cmdNew.Click += new System.EventHandler(this.cmdNew_Click);
-            //
+            // 
             // contextMenu1
-            //
+            // 
+            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.MenuItemOpen,
+            this.MenuItemCopy,
+            this.MenuItemMove,
+            this.MenuItemDelete,
+            this.MenuItemRename});
+            // 
+            // MenuItemOpen
+            // 
+            this.MenuItemOpen.Index = 0;
             this.MenuItemOpen.Text = "Otwórz";
-            this.MenuItemCopy.Text = "Kopiuj";
-            this.MenuItemMove.Text = "Przenieś";
-            this.MenuItemDelete.Text = "Usuń";
-            this.MenuItemRename.Text = "Zmień nazwę";
-            this.contextMenu1.MenuItems.Add(this.MenuItemOpen);
-            this.contextMenu1.MenuItems.Add(this.MenuItemCopy);
-            this.contextMenu1.MenuItems.Add(this.MenuItemMove);
-            this.contextMenu1.MenuItems.Add(this.MenuItemDelete);
-            this.contextMenu1.MenuItems.Add(this.MenuItemRename);
             this.MenuItemOpen.Click += new System.EventHandler(this.cmdOpen_Click);
+            // 
+            // MenuItemCopy
+            // 
+            this.MenuItemCopy.Index = 1;
+            this.MenuItemCopy.Text = "Kopiuj";
             this.MenuItemCopy.Click += new System.EventHandler(this.cmdCopy_Click);
+            // 
+            // MenuItemMove
+            // 
+            this.MenuItemMove.Index = 2;
+            this.MenuItemMove.Text = "Przenieś";
             this.MenuItemMove.Click += new System.EventHandler(this.cmdMove_Click);
+            // 
+            // MenuItemDelete
+            // 
+            this.MenuItemDelete.Index = 3;
+            this.MenuItemDelete.Text = "Usuń";
             this.MenuItemDelete.Click += new System.EventHandler(this.cmdDelete_Click);
+            // 
+            // MenuItemRename
+            // 
+            this.MenuItemRename.Index = 4;
+            this.MenuItemRename.Text = "Zmień nazwę";
             this.MenuItemRename.Click += new System.EventHandler(this.cmdRename_Click);
             // 
             // PonyCommanderForm

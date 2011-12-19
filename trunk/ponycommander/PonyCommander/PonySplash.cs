@@ -14,8 +14,7 @@ namespace PonyCommander
     {
         public PonySplash()
         {
-            InitializeComponent();
-            
+            InitializeComponent();          
         }
 
         private void PonySplash_Load(object sender, EventArgs e)
