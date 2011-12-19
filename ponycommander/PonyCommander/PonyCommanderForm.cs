@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Collections;
 
 namespace PonyCommander
 {
@@ -18,6 +19,8 @@ namespace PonyCommander
         private string NieAktywnaSciezka;
         private string sciezka1 = "C:\\";
         private string sciezka2 = "C:\\";
+        private int sortColumn1 = -1;
+        private int sortColumn2 = -1;
 
         public PonyCommanderForm()
         {
@@ -36,6 +39,7 @@ namespace PonyCommander
 
         private void wyswietl(ListView gdzie, string katalog)
         {
+            
             gdzie.Items.Clear();
             string[] nazwy;
             ListViewItem buf;
@@ -51,7 +55,7 @@ namespace PonyCommander
                 for (i = 0; i < nazwy.Length; i++)
                 {
                     dir = new DirectoryInfo(nazwy[i]);
-                    buf = new ListViewItem(new string[] { dir.Name, "<DIR>" });
+                    buf = new ListViewItem(new string[] { dir.Name, "<DIR>", "", dir.LastWriteTime.ToString() });
                     gdzie.Items.Add(buf);
                 }
                 string nazwapliku;
@@ -65,7 +69,7 @@ namespace PonyCommander
                     if (gdziekropka > 0)
                         nazwapliku = nazwapliku.Substring(0, plik.Name.LastIndexOf('.'));
                     buf = new ListViewItem(new string[] { nazwapliku, plik.Extension.Replace(".", ""),
-                    plik.Length.ToString() });
+                    plik.Length.ToString(), plik.LastWriteTime.ToString()});
                     gdzie.Items.Add(buf);
                 }
             }
@@ -394,8 +398,7 @@ namespace PonyCommander
                         }
                         try
                         {
-                            KopiujKatalog(zrodlo, cel);
-                            Directory.Delete(zrodlo, true);
+                            Directory.Move(zrodlo, cel);
                         }
                         catch
                         {
@@ -430,8 +433,7 @@ namespace PonyCommander
                         }
                         try
                         {
-                            File.Copy(zrodlo, cel, true);
-                            File.Delete(zrodlo);
+                            File.Move(zrodlo, cel);
                         }
                         catch
                         {
@@ -513,9 +515,8 @@ namespace PonyCommander
                     {                       
                         try
                         {
-                            zrodlo = AktywnaSciezka + AktywneOkno.SelectedItems[0].Text + "\\";
-                            KopiujKatalog(zrodlo, cel);
-                            Directory.Delete(zrodlo, true);
+                            zrodlo = AktywnaSciezka + AktywneOkno.SelectedItems[0].Text + "\\";                
+                            Directory.Move(zrodlo, cel);
                         }
                         catch
                         {
@@ -527,9 +528,8 @@ namespace PonyCommander
                     else
                     {
                         try
-                        {
-                            File.Copy(zrodlo, cel, true);
-                            File.Delete(zrodlo);
+                        {                           
+                            File.Move(zrodlo, cel);
                         }
                         catch
                         {
@@ -599,6 +599,95 @@ namespace PonyCommander
                     break;
             }
         }
-                
+
+        private void lvOkno1_ColumnClick(object sender, System.Windows.Forms.ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != sortColumn1)
+            {
+                // Set the sort column to the new column.
+                sortColumn1 = e.Column;
+                // Set the sort order to ascending by default.
+                lvOkno1.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvOkno1.Sorting == SortOrder.Ascending)
+                    lvOkno1.Sorting = SortOrder.Descending;
+                else
+                    lvOkno1.Sorting = SortOrder.Ascending;
+            }
+
+            // Call the sort method to manually sort.
+            lvOkno1.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer
+            // object.
+            this.lvOkno1.ListViewItemSorter = new ListViewItemComparer(e.Column,
+                                                              lvOkno1.Sorting);
+        }
+        
+        private void lvOkno2_ColumnClick(object sender, System.Windows.Forms.ColumnClickEventArgs e)
+        {
+            // Determine whether the column is the same as the last column clicked.
+            if (e.Column != sortColumn2)
+            {
+                // Set the sort column to the new column.
+                sortColumn2 = e.Column;
+                // Set the sort order to ascending by default.
+                lvOkno2.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                // Determine what the last sort order was and change it.
+                if (lvOkno2.Sorting == SortOrder.Ascending)
+                    lvOkno2.Sorting = SortOrder.Descending;
+                else
+                    lvOkno2.Sorting = SortOrder.Ascending;
+            }
+
+            // Call the sort method to manually sort.
+            lvOkno2.Sort();
+            // Set the ListViewItemSorter property to a new ListViewItemComparer
+            // object.
+            this.lvOkno2.ListViewItemSorter = new ListViewItemComparer(e.Column,
+                                                              lvOkno2.Sorting);
+        }
+
+               
+    }
+    class ListViewItemComparer : IComparer
+    {
+        private int col;
+        private SortOrder order;
+        public ListViewItemComparer()
+        {
+            col = 0;
+            order = SortOrder.Ascending;
+        }
+        public ListViewItemComparer(int column, SortOrder order)
+        {
+            col = column;
+            this.order = order;
+        }
+            public int Compare(object x, object y) 
+            {
+            int returnVal= -1;
+            try
+            {
+                returnVal = String.Compare(((ListViewItem)x).SubItems[col].Text,
+                                        ((ListViewItem)y).SubItems[col].Text);
+            }
+            catch 
+            {
+                MessageBox.Show("Czemu ten blad tu jest?!", "Błąd",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // Determine whether the sort order is descending.
+            if (order == SortOrder.Descending)
+                // Invert the value returned by String.Compare.
+                returnVal *= -1;
+            return returnVal;
+        }
     }
 }

@@ -41,10 +41,12 @@ namespace PonyCommander
             this.Nazwa = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Typ = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Rozmiar = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Data = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvOkno2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Dysk1 = new System.Windows.Forms.ComboBox();
             this.Dysk2 = new System.Windows.Forms.ComboBox();
             this.cmdOpen = new System.Windows.Forms.Button();
@@ -62,7 +64,8 @@ namespace PonyCommander
             this.lvOkno1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Nazwa,
             this.Typ,
-            this.Rozmiar});
+            this.Rozmiar,
+            this.Data});
             this.lvOkno1.FullRowSelect = true;
             this.lvOkno1.HideSelection = false;
             this.lvOkno1.Location = new System.Drawing.Point(12, 39);
@@ -73,7 +76,9 @@ namespace PonyCommander
             this.lvOkno1.View = System.Windows.Forms.View.Details;
             this.lvOkno1.Enter += new System.EventHandler(this.lvOkno1_Enter);
             this.lvOkno1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);
+            this.lvOkno1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvOkno1_ColumnClick);
             this.lvOkno1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
+            
             // 
             // Nazwa
             // 
@@ -82,11 +87,19 @@ namespace PonyCommander
             // Typ
             // 
             this.Typ.Text = "Typ";
+            this.Typ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Rozmiar
             // 
             this.Rozmiar.Text = "Rozmiar";
+            this.Rozmiar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Rozmiar.Width = 65;
+            // 
+            // Data
+            // 
+            this.Data.Text = "Data";
+            this.Data.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Data.Width = 100;
             // 
             // lvOkno2
             // 
@@ -95,7 +108,8 @@ namespace PonyCommander
             this.lvOkno2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader4});
             this.lvOkno2.FullRowSelect = true;
             this.lvOkno2.HideSelection = false;
             this.lvOkno2.Location = new System.Drawing.Point(394, 39);
@@ -107,6 +121,7 @@ namespace PonyCommander
             this.lvOkno2.Enter += new System.EventHandler(this.lvOkno2_Enter);
             this.lvOkno2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);
             this.lvOkno2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
+            this.lvOkno2.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvOkno2_ColumnClick);
             // 
             // columnHeader1
             // 
@@ -115,10 +130,19 @@ namespace PonyCommander
             // columnHeader2
             // 
             this.columnHeader2.Text = "Typ";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Rozmiar";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader3.Width = 65;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Data";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader4.Width = 100;
             // 
             // Dysk1
             // 
@@ -194,7 +218,7 @@ namespace PonyCommander
             this.cmdRename.Text = "Zmień nazwę\r\nF9";
             this.cmdRename.UseVisualStyleBackColor = true;
             this.cmdRename.Click += new System.EventHandler(this.cmdRename_Click);
-            //
+            // 
             // cmdNew
             // 
             this.cmdNew.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -242,9 +266,11 @@ namespace PonyCommander
         private System.Windows.Forms.ColumnHeader Nazwa;
         private System.Windows.Forms.ColumnHeader Typ;
         private System.Windows.Forms.ColumnHeader Rozmiar;
+        private System.Windows.Forms.ColumnHeader Data;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ComboBox Dysk1;
         private System.Windows.Forms.ComboBox Dysk2;
         private System.Windows.Forms.Button cmdOpen;
@@ -255,4 +281,3 @@ namespace PonyCommander
         private System.Windows.Forms.Button cmdNew;
     }
 }
-
