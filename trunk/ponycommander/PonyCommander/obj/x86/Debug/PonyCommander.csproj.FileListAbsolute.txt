@@ -10,3 +10,14 @@ c:\users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommande
 C:\Users\plagia\documents\visual studio 2010\Projects\PonyCommander\PonyCommander\obj\x86\Debug\PonyCommander.PonySplash.resources
 C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\PonyCommander.exe
 C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\PonyCommander.pdb
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\bin\Debug\PonyCommander.exe
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\bin\Debug\PonyCommander.pdb
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\PonyCommander.PonyCommanderForm.resources
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\PonyCommander.PonySplash.resources
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\PonyCommander.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\GenerateResource-ResGen.read.4.tlog
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\ResGen.read.1.tlog
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Documents and Settings\Administrator\Moje dokumenty\Dropbox\PUT\VII semestr\Programowanie wizualne\ponycommander\PonyCommander\obj\x86\Debug\ResGen.write.1.tlog
