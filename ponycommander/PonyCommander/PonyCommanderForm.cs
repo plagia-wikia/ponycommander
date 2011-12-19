@@ -215,6 +215,18 @@ namespace PonyCommander
             NieAktywnaSciezka = sciezka1;
         }
 
+        private void lvOkno_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e == null || e.Button == MouseButtons.Right)
+            {
+                Point pt = e.Location;
+                contextMenu1.Show(AktywneOkno, pt);
+                if (AktywneOkno == lvOkno1)
+                    sciezka1 = AktywnaSciezka;
+                else sciezka2 = AktywnaSciezka;
+            }
+        }
+
         private void lvOkno_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e == null || e.Button == MouseButtons.Left)
@@ -355,6 +367,8 @@ namespace PonyCommander
                         }
                         try
                         {
+
+                            
                             
                             File.Copy(zrodlo, cel, true);
                         }
@@ -653,9 +667,9 @@ namespace PonyCommander
             this.lvOkno2.ListViewItemSorter = new ListViewItemComparer(e.Column,
                                                               lvOkno2.Sorting);
         }
-
-               
+                                      
     }
+
     class ListViewItemComparer : IComparer
     {
         private int col;
@@ -690,4 +704,5 @@ namespace PonyCommander
             return returnVal;
         }
     }
+
 }

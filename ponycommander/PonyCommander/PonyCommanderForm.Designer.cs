@@ -55,6 +55,12 @@ namespace PonyCommander
             this.cmdDelete = new System.Windows.Forms.Button();
             this.cmdRename = new System.Windows.Forms.Button();
             this.cmdNew = new System.Windows.Forms.Button();
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.MenuItemOpen = new System.Windows.Forms.MenuItem();
+            this.MenuItemCopy = new System.Windows.Forms.MenuItem();
+            this.MenuItemMove = new System.Windows.Forms.MenuItem();
+            this.MenuItemDelete = new System.Windows.Forms.MenuItem();
+            this.MenuItemRename = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // lvOkno1
@@ -77,8 +83,8 @@ namespace PonyCommander
             this.lvOkno1.Enter += new System.EventHandler(this.lvOkno1_Enter);
             this.lvOkno1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);
             this.lvOkno1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvOkno1_ColumnClick);
+            this.lvOkno1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseClick);
             this.lvOkno1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
-            
             // 
             // Nazwa
             // 
@@ -119,8 +125,9 @@ namespace PonyCommander
             this.lvOkno2.UseCompatibleStateImageBehavior = false;
             this.lvOkno2.View = System.Windows.Forms.View.Details;
             this.lvOkno2.Enter += new System.EventHandler(this.lvOkno2_Enter);
-            this.lvOkno2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);
+            this.lvOkno2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvOkno_KeyDown);            
             this.lvOkno2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
+            this.lvOkno2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseClick);
             this.lvOkno2.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvOkno2_ColumnClick);
             // 
             // columnHeader1
@@ -229,6 +236,24 @@ namespace PonyCommander
             this.cmdNew.Text = "Utwórz katalog\r\n10";
             this.cmdNew.UseVisualStyleBackColor = true;
             this.cmdNew.Click += new System.EventHandler(this.cmdNew_Click);
+            //
+            // contextMenu1
+            //
+            this.MenuItemOpen.Text = "Otwórz";
+            this.MenuItemCopy.Text = "Kopiuj";
+            this.MenuItemMove.Text = "Przenieś";
+            this.MenuItemDelete.Text = "Usuń";
+            this.MenuItemRename.Text = "Zmień nazwę";
+            this.contextMenu1.MenuItems.Add(this.MenuItemOpen);
+            this.contextMenu1.MenuItems.Add(this.MenuItemCopy);
+            this.contextMenu1.MenuItems.Add(this.MenuItemMove);
+            this.contextMenu1.MenuItems.Add(this.MenuItemDelete);
+            this.contextMenu1.MenuItems.Add(this.MenuItemRename);
+            this.MenuItemOpen.Click += new System.EventHandler(this.cmdOpen_Click);
+            this.MenuItemCopy.Click += new System.EventHandler(this.cmdCopy_Click);
+            this.MenuItemMove.Click += new System.EventHandler(this.cmdMove_Click);
+            this.MenuItemDelete.Click += new System.EventHandler(this.cmdDelete_Click);
+            this.MenuItemRename.Click += new System.EventHandler(this.cmdRename_Click);
             // 
             // PonyCommanderForm
             // 
@@ -254,7 +279,6 @@ namespace PonyCommander
             this.Load += new System.EventHandler(this.PonyCommanderForm_Load);
             this.SizeChanged += new System.EventHandler(this.PonyCommanderForm_Resize);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PonyCommanderForm_KeyDown);
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvOkno_MouseDoubleClick);
             this.ResumeLayout(false);
 
         }
@@ -279,5 +303,12 @@ namespace PonyCommander
         private System.Windows.Forms.Button cmdDelete;
         private System.Windows.Forms.Button cmdRename;
         private System.Windows.Forms.Button cmdNew;
+        private System.Windows.Forms.ContextMenu contextMenu1;
+        private System.Windows.Forms.MenuItem MenuItemOpen;
+        private System.Windows.Forms.MenuItem MenuItemCopy;
+        private System.Windows.Forms.MenuItem MenuItemMove;
+        private System.Windows.Forms.MenuItem MenuItemDelete;
+        private System.Windows.Forms.MenuItem MenuItemRename;
+
     }
 }
